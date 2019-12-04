@@ -9,7 +9,4 @@
  {:up   ["CREATE TABLE todos (id SERIAL  PRIMARY KEY, title TEXT)"
          "INSERT INTO todos (title) values('test1')"
          "INSERT INTO todos (title) values('test2')"]
-  :down ["DOROP TABLE todos"]
-  }
-
- }
+  :down ["DROP TABLE todos"]}}

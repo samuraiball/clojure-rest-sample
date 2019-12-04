@@ -1,21 +1,19 @@
 {:duct.profile/base
-                      {:duct.core/project-ns todo
+                      {:duct.core/project-ns      todo
 
                        :duct.router/ataraxy
-                       {:routes
-                        {[:get "/todos"] [:todo.handler.todos/list]}
-                        }
-                       ;; Handlers
-                       :todo.handler.todos/list {:db #ig/ref :duct.database/sql}
+                                                  {:routes
+                                                   {[:get "/todos"]                      [:todo.handler.todos/list]
+                                                    [:post "/todos" {body :body-params}] [:todo.handler.todos/create body]}}
 
-                       }
+                       :todo.handler.todos/list   {:db #ig/ref :duct.database/sql}
+                       :todo.handler.todos/create {:db #ig/ref :duct.database/sql}}
 
- :duct.profile/dev   #duct/include "dev"
- :duct.profile/local #duct/include "local"
- :duct.profile/prod  {}
+ :duct.profile/dev    #duct/include "dev"
+ :duct.profile/local  #duct/include "local"
+ :duct.profile/prod   {}
 
  :duct.module/logging {}
  :duct.module.web/api
                       {}
- :duct.module/sql
-                      {}}
+ :duct.module/sql     {}}
