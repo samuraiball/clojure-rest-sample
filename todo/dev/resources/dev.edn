@@ -1,7 +1,6 @@
 {:duct.database/sql
  {:connection-uri "jdbc:postgresql://localhost:5432/todo-db?user=username01&password=password01"}
 
-
  :duct.migrator/ragtime
  {:migrations [#ig/ref :todo.migration/create-todos]}
 

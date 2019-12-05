@@ -13,3 +13,8 @@
                (let [result (todos/create-todo db params)
                      id (:id (first result))]
                     [::response/created (str "/todos/" id)])))
+
+(defmethod ig/init-key ::update [_ {:keys [db]}]
+           (fn [{[_ id params] :ataraxy/result}]
+               (todos/update-todo db id params)
+               [::response/ok]))
