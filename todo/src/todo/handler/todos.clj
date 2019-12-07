@@ -8,6 +8,11 @@
                (let [todos (todos/get-todos db)]
                     [::response/ok todos])))
 
+(defmethod ig/init-key ::fetch [_ {:keys [db]}]
+           (fn [_ id]
+                (let [todo (todos/fetch-todo db id)]
+                     [::response/ok todo])))
+
 (defmethod ig/init-key ::create [_ {:keys [db]}]
            (fn [{[_ params] :ataraxy/result}]
                (let [result (todos/create-todo db params)

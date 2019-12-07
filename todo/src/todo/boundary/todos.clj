@@ -5,13 +5,17 @@
 (defprotocol Todos
              (get-todos [db])
              (create-todo [db params])
-             (update-todo [db id params]))
+             (update-todo [db id params])
+             (fetch-todo [db id]))
 
 (extend-protocol Todos
                  duct.database.sql.Boundary
 
                  (get-todos [{:keys [spec]}]
                             (jdbc/query spec ["SELECT * FROM todos"]))
+
+                 (fetch-todo [{:keys [spec]} id]
+                             (jdbc/query spec [(format "SELECT * FROM toods WHERE ")]))
 
                  (create-todo [{:keys [spec]} params]
                                (jdbc/insert! spec :todos {:title (:title params)}))
