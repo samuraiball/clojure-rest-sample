@@ -15,7 +15,7 @@
                             (jdbc/query spec ["SELECT * FROM todos"]))
 
                  (fetch-todo [{:keys [spec]} id]
-                             (jdbc/query spec [(format "SELECT * FROM toods WHERE ")]))
+                             (jdbc/query spec [(format "SELECT * FROM todos WHERE id = '%s'" id)]))
 
                  (create-todo [{:keys [spec]} params]
                                (jdbc/insert! spec :todos {:title (:title params)}))

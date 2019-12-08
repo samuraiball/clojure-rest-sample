@@ -9,7 +9,7 @@
                     [::response/ok todos])))
 
 (defmethod ig/init-key ::fetch [_ {:keys [db]}]
-           (fn [_ id]
+           (fn [{ [_ id] :ataraxy/result}]
                 (let [todo (todos/fetch-todo db id)]
                      [::response/ok todo])))
 
