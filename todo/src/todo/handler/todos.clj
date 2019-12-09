@@ -9,9 +9,9 @@
                     [::response/ok todos])))
 
 (defmethod ig/init-key ::fetch [_ {:keys [db]}]
-           (fn [{ [_ id] :ataraxy/result}]
-                (let [todo (todos/fetch-todo db id)]
-                     [::response/ok todo])))
+           (fn [{[_ id] :ataraxy/result}]
+               (let [todo (todos/fetch-todo db id)]
+                    [::response/ok todo])))
 
 (defmethod ig/init-key ::create [_ {:keys [db]}]
            (fn [{[_ params] :ataraxy/result}]
@@ -23,3 +23,8 @@
            (fn [{[_ id params] :ataraxy/result}]
                (todos/update-todo db id params)
                [::response/ok]))
+
+(defmethod ig/init-key ::delete [_ {:keys [db]}]
+           (fn [{[_ id] :ataraxy/result}]
+               (todos/delete-todo db id)
+               [::response/deleted]))

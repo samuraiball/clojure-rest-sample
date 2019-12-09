@@ -6,7 +6,8 @@
              (get-todos [db])
              (create-todo [db params])
              (update-todo [db id params])
-             (fetch-todo [db id]))
+             (fetch-todo [db id])
+             (delete-todo [db id]))
 
 (extend-protocol Todos
                  duct.database.sql.Boundary
@@ -21,4 +22,7 @@
                                (jdbc/insert! spec :todos {:title (:title params)}))
 
                  (update-todo [{:keys [spec]} id params]
-                              (jdbc/update! spec :todos {:title (:title params)} ["id = ?" id])))
+                              (jdbc/update! spec :todos {:title (:title params)} ["id = ?" id]))
+
+                 (delete-todo [{:keys [spec]} id]
+                              (jdbc/delete! spec :todos ["id = ?" id])))
